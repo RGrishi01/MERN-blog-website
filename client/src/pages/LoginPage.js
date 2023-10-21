@@ -7,7 +7,8 @@ export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
-  const {setUserInfo} = useContext(UserContext);
+  const [redirect2, setRedirect2] = useState(false);
+  const { setUserInfo } = useContext(UserContext);
 
   async function login(ev) {
     ev.preventDefault();
@@ -20,15 +21,20 @@ export default function LoginPage() {
     });
 
     if (response.ok) {
-      response.json().then(userInfo => {
+      response.json().then((userInfo) => {
         setUserInfo(userInfo);
         setRedirect(true);
-      })
-    } else alert("wrong credentials");
+      });
+    } else {
+      alert("wrong credentials");
+      setRedirect2(true);
+    }
   }
 
+  if (redirect2) return <Navigate to="/register" />;
+
   if (redirect) {
-    return <Navigate to={"/"} />;
+    return <Navigate to={"/loggedin/"} />;
   }
 
   return (

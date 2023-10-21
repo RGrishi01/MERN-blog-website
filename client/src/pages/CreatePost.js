@@ -57,7 +57,7 @@ export default function CreatePost() {
     }
   }
 
-  if (redirect) return <Navigate to={"/"} />;
+  if (redirect) return <Navigate to={"/loggedin/index"} />;
 
   return (
     <form onSubmit={createNewPost}>
